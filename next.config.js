@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["img.freepik.com", "lh3.googleusercontent.com"]
+  },
+  output: 'standalone',
 }
 
 module.exports = nextConfig

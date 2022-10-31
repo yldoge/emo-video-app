@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: emo-app
+  name: emo-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: emo-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: emo-app
+    spec:
+      containers:
+      - image: 837913905808.dkr.ecr.us-west-1.amazonaws.com/frontend/nextjs-node:1.0
+        name: webapp
+        imagePullPolicy: Always
+        resources: {}
+        ports:
+          - containerPort: 3000 
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: emo-app
+  labels:
+    run: emo-app
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  selector:
+    app: emo-app
+  type: LoadBalancer
+
